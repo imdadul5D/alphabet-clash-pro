@@ -26,3 +26,8 @@ function getARandomAlphabet() {
     return alphabet;
 };
 
+function setTextElementValueById( mim, value) {
+    const element = document.getElementById(mim);
+    element.innerText = value;
+}
+

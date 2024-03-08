@@ -1,6 +1,9 @@
 function handleKeyboardKeyUpEvent(event){
     const playerPressed = event.key
     // console.log('player pressed',playerPressed);
+    if(playerPressed === 'Escape') {
+        gameOver();
+    }
 
 
     // Get The Expected to Press
@@ -17,7 +20,7 @@ function handleKeyboardKeyUpEvent(event){
         const currentScoreElement = document.getElementById('current-score');
         const currentScoreText = currentScoreElement.innerText;
         const currentScore = parseInt(currentScoreText);
-        console.log(currentScore);
+        // console.log(currentScore);
 
         // Increase the score by 1
         const newScore = currentScore + 1;
@@ -30,7 +33,7 @@ function handleKeyboardKeyUpEvent(event){
         continueGame();
     }
     else {
-        console.log('You Missed. You Lost Your Life');
+        // console.log('You Missed. You Lost Your Life');
         // get the current life number
         const currentLifeEment = document.getElementById('current-life');
         const currentLifeText = currentLifeEment.innerText;
@@ -41,13 +44,17 @@ function handleKeyboardKeyUpEvent(event){
 
         // display the updated life count
         currentLifeEment.innerText = newLife;
+
+        if(newLife === 0) {
+            gameOver();
+        }
     }
 }
 document.addEventListener('keyup', handleKeyboardKeyUpEvent);
 
 function continueGame() {
     const alphabet = getARandomAlphabet();
-    console.log('Your Alphabet: ', alphabet);
+    // console.log('Your Alphabet: ', alphabet);
     
     const randomAlpha = document.getElementById('randomAlphabet');
     randomAlpha.innerText = alphabet;
@@ -55,7 +62,28 @@ function continueGame() {
     setBgColorById(alphabet);
 }
 function play(){
+    // Hide Everything show only the playground
     hidden('home');
+    hidden('final-score');
     show('playGround');
+
+    // Reset score and life
+    setTextElementValueById('current-life', 10);
+    setTextElementValueById('current-score', 0);
+
     continueGame();
+}
+
+function gameOver(){
+    hidden('playGround');
+    show('final-score');
+
+    const lastScore = document.getElementById('current-score');
+    const finalScore = lastScore.innerText;
+    const fnumbe = parseInt(finalScore);
+    setTextElementValueById('final-score-m', finalScore);
+
+    // Clear the lajst selected alphabet highlight
+    // const currentAlphabet = document.getElementById('randomAlpha');
+    // removeBgColorById(currentAlphabet);
 }
