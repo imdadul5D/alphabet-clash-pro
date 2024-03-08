@@ -10,6 +10,11 @@ function setBgColorById(redwan){
     const element = document.getElementById(redwan);
     element.classList.add('bg-orange-400');
 }
+
+function removeBgColorById(mim){
+    const element = document.getElementById(mim);
+    element.classList.remove('bg-orange-400');
+}
 function getARandomAlphabet() {
     const alphabetString = 'abcdefghijknmopqurstwvyx';
     const alphabets = alphabetString.split('');
